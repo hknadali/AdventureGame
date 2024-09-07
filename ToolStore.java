@@ -38,7 +38,7 @@ public class ToolStore extends NormalLoc {
 	}
 
 	public void printArmor() {
-		System.out.println("---- Armor ----");
+		System.out.println("#### Armor ####");
 		for(Armor armor : Armor.armors()) {
 			System.out.println(armor.getId() + "\s-\s" + armor.getName() + 
 							"\s\t< Price: " + armor.getPrice() + 
@@ -74,7 +74,7 @@ public class ToolStore extends NormalLoc {
 	
 
 	public void printWeapon() {
-		System.out.println("---- Weapons ----");
+		System.out.println("#### Weapons ####");
 		for(Weapon weapon : Weapon.weapons()) {
 			System.out.println(weapon.getId() + "\s-\s" + weapon.getName() + 
 							"\s\t< Price: " + weapon.getPrice() + 
