@@ -9,6 +9,7 @@ public class SafeHouse extends NormalLoc{
 	public boolean onLocation() {
 		System.out.println("You are in the Safe House!");
 		System.out.println("Your HP has been restored.");
+		this.getPlayer().setHp(this.getPlayer().getDefHp());
 		return true;
 	}
 }
