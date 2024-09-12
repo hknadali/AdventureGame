@@ -37,14 +37,32 @@ public class Game {
 				location = new ToolStore(player);
 				break;
 			case 3:
-				location = new Cave(player);
-				break;
+				if(!player.getInventory().isFood()) {
+					location = new Cave(player);
+					break;
+				}
+				else {
+					System.out.println("You cleaned up the Cave, discover other locations!");
+					continue;
+				}
 			case 4:
-				location = new Forest(player);
-				break;
+				if(!player.getInventory().isFirewood()) {
+					location = new Forest(player);
+					break;
+				}
+				else {
+					System.out.println("You cleaned up the Forest, discover other locations!");
+					continue;
+				}
 			case 5:
-				location = new River(player);
-				break;
+				if(!player.getInventory().isWater()) {
+					location = new River(player);
+					break;
+				}
+				else {
+					System.out.println("You cleaned up the River, discover other locations!");
+					continue;
+				}
 			default:
 				System.out.println("Please enter a valid location!");
 			}	
@@ -55,6 +73,16 @@ public class Game {
 			
 			if(!location.onLocation()) {
 				System.out.println("GAME OVER!");
+				break;
+			}
+			
+			if(player.checkWin()) {
+				System.out.println("#########################");
+				System.out.println("  C O N G R A T S ! ");
+				System.out.println("\tYou win!");
+				System.out.println("\tCredits:");
+				System.out.println("Hakan ADALI - Patika.dev");
+				System.out.println("#########################");
 				break;
 			}
 		}

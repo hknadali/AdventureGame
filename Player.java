@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Player {
 	private int damage;
-	private int hp; //health point
+	private int hp; // health point
+	private int defHp; // default health point
 	private int gold;
 	private String name;
 	private String charName;
@@ -48,19 +49,25 @@ public class Player {
 	public void initPlayer(GameChar gameChar) {
 		this.setDamage(gameChar.getDamage());
 		this.setHp(gameChar.getHp());
+		this.setDefHp(gameChar.getHp());
 		this.setGold(gameChar.getGold());
 		this.setCharName(gameChar.getName());
 	}
 	
 	public void printInfo() {
+		System.out.println("--------------------------------------------------------------------------------------------");
 		System.out.println("Weapon:\t" + this.getInventory().getWeapon().getName() +
-						"\nArmor:\t" + this.getInventory().getArmor().getName() +
-						"\nBlock:\t" + this.getInventory().getArmor().getBlock() +
-						"\nDamage:\t" + this.getDamage() +
-						"\nHP:\t" + this.getHp() +
-						"\nGold:\t" + this.getGold());
+						"\tArmor:\t" + this.getInventory().getArmor().getName() +
+						"\tBlock:\t" + this.getInventory().getArmor().getBlock() +
+						"\tDamage:\t" + this.getDamage() +
+						"\tHP:\t" + this.getHp() +
+						"\tGold:\t" + this.getGold());
+		System.out.println("--------------------------------------------------------------------------------------------");
 	}
 
+	public boolean checkWin() {
+		return this.getInventory().isFood() && this.getInventory().isFirewood() && this.getInventory().isWater() && this.getHp() > 0;
+	}
 	public int getDamage() {
 		return damage + this.getInventory().getWeapon().getDamage();
 	}
@@ -75,6 +82,14 @@ public class Player {
 
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+
+	public int getDefHp() {
+		return defHp;
+	}
+
+	public void setDefHp(int defHp) {
+		this.defHp = defHp;
 	}
 
 	public int getGold() {
