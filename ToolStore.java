@@ -67,6 +67,7 @@ public class ToolStore extends NormalLoc {
 					System.out.println("Your remaining gold: " + this.getPlayer().getGold());
 					this.getPlayer().getInventory().setArmor(selectedArmor);
 					System.out.println("Your new armor: " + this.getPlayer().getInventory().getArmor().getName());
+					System.out.println("----------------------------");
 				}
 			}
 		}
@@ -103,6 +104,7 @@ public class ToolStore extends NormalLoc {
 					System.out.println("Your remaining gold: " + this.getPlayer().getGold());
 					this.getPlayer().getInventory().setWeapon(selectedWeapon);
 					System.out.println("Your new weapon: " + this.getPlayer().getInventory().getWeapon().getName());
+					System.out.println("----------------------------");
 				}
 			}
 		}
