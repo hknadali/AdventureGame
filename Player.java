@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Player {
@@ -66,7 +67,7 @@ public class Player {
 	}
 
 	public boolean checkWin() {
-		return this.getInventory().isFood() && this.getInventory().isFirewood() && this.getInventory().isWater() && this.getHp() > 0;
+		return this.getInventory().checkItemExists("Food") && this.getInventory().checkItemExists("Firewood") && this.getInventory().checkItemExists("Water") && this.getHp() > 0;
 	}
 	public int getDamage() {
 		return damage + this.getInventory().getWeapon().getDamage();
