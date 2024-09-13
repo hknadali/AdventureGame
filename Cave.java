@@ -2,6 +2,6 @@
 public class Cave extends BattleLoc {
 
 	public Cave(Player player) {
-		super(player, "Cave", new Zombie(), "food", 4);
+		super(player, "Cave", new Zombie(), "Food", 4);
 	}
 }
