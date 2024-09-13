@@ -7,7 +7,7 @@ Choose your fighter and dive into this dangerous world.
 
 There are 4 different battle locations and each has its own monsters and rewards.
 	
-					Monster	:	Reward:
+			Monster	:	Reward:
 	Cave	-> 	Zombie		Food
 	Forest	-> 	Vampire		Firewood
 	River	->	Bear		Water
