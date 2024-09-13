@@ -39,6 +39,9 @@ public abstract class BattleLoc extends Location {
 	public boolean combat(int mnsNumber) {
 		for(int i = 1; i <= mnsNumber; i++) {
 			this.getMonster().setHp(this.getMonster().getDefHp());
+			if(this.getMonster().getName().equals("Snake")) {
+				this.getMonster().setDamage((int)(Math.random()*(3 + 1)) + 3);
+			}
 			playerStats();
 			monsterStats(i);
 			int hitFirst = ((int)(Math.random() * 2 + 1)); // 1 = player hits first, 2 = monster hits first
@@ -94,16 +97,17 @@ public abstract class BattleLoc extends Location {
 	public void locationReward() {
         switch (this.getName()) {
             case "Cave":
-                this.getPlayer().getInventory().setFood(true);
+                this.getPlayer().getInventory().insertItem(new Item(7, this.reward));
                 break;
             case "Forest":
-                this.getPlayer().getInventory().setFirewood(true);
+                this.getPlayer().getInventory().insertItem(new Item(8, this.reward));
                 break;
             case "River":
-                this.getPlayer().getInventory().setWater(true);
+                this.getPlayer().getInventory().insertItem(new Item(9, this.reward));
                 break;
-//            case "Mine":
-//                createRandomSnakeLoot(Snake.createRandomLootNumber());
+            case "Mine":
+                dropRandomMineReward();;
+                break;
         }
     }
 	
@@ -151,6 +155,65 @@ public abstract class BattleLoc extends Location {
 		Random r = new Random();
 		return r.nextInt(this.getMaxMonster()) + 1;
 	}
+	
+	public void dropRandomMineReward() {
+		double dropRate = Math.random()*(101);
+		if(dropRate <= 30 && !this.getPlayer().getInventory().isInventoryFull()) {
+			if(dropRate <= 15 && dropRate > 0) {		// Weapon dropRate is %15 => %50 Sword - %30 Pistol - %20 Rifle
+				if(dropRate <= 7.5)
+					takeItem(new Weapon(1, "Sword", 2, 25));
+				else if(dropRate > 7.5 && dropRate <=11.7) {
+					takeItem(new Weapon(2, "Pistol", 5, 35));
+				}
+				else {
+					takeItem(new Weapon(3, "Rifle", 7, 45));
+				}
+			}
+			else if(dropRate > 15 && dropRate <= 30) {	// Armor dropRate is %15 => %50 Light - %30 Medium - %20 Heavy
+				if(dropRate <= 22.5)
+					takeItem(new Armor(1, "Light", 1, 15));
+				else if(dropRate > 22.5 && dropRate <=26.7) {
+					takeItem(new Armor(2, "Medium", 3, 25));
+				}
+				else {
+					takeItem(new Armor(3, "Heavy", 5, 35));
+				}
+			}
+		}
+		else if(dropRate > 30 && dropRate <=55) {		// Gold dropRate is %25 => %50 1 Gold - %30 5 Gold - %20 10 Gold
+			if(dropRate <= 42.5)
+				this.getPlayer().setGold(this.getPlayer().getGold() + 1);
+			else if(dropRate > 42.5 && dropRate <= 49.7) {
+				this.getPlayer().setGold(this.getPlayer().getGold() + 5);
+			}
+			else {
+				this.getPlayer().setGold(this.getPlayer().getGold() + 10);
+			}
+		}
+		else {	// The dropRate of getting nothing is %45
+			System.out.println("Bad luck :( You earn nothing this time. Next time, fight harder!");;
+		}
+	}
+	
+	public boolean takeItem(Item item) {
+		this.getPlayer().getInventory().printInventory();
+		System.out.println("Do you want to take the item dropped ?\t< Y >: Yes\t< N >: No");
+		System.out.println("Item:\t" + item.getName());
+		String selection = input.nextLine().toUpperCase();
+		while(true) {
+			switch(selection) {
+			case "Y":
+				this.getPlayer().getInventory().insertItem(item);
+				return true;
+			case "N":
+				return false;
+			default:
+				System.out.println("!!! Invalid input, try again !!!");
+				continue;
+			}
+		}
+	}
+	
 	public Monster getMonster() {
 		return monster;
 	}
@@ -174,5 +237,4 @@ public abstract class BattleLoc extends Location {
 	public void setMaxMonster(int maxMonster) {
 		this.maxMonster = maxMonster;
 	}
-	
 }
