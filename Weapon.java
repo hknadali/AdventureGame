@@ -1,23 +1,20 @@
 
-public class Weapon {
+public class Weapon extends Item {
 	
-	private String name;
-	private int id;
 	private int damage;
 	private int price;
 	
-	public Weapon(String name, int id, int damage, int price) {
-		this.name = name;
-		this.id = id;
+	public Weapon(int id, String name, int damage, int price) {
+		super(id, name);
 		this.damage = damage;
 		this.price = price;
 	}
 	
 	public static Weapon[] weapons() {
 		Weapon[] weaponList = new Weapon[3];
-		weaponList[0] = new Weapon("Sword", 1, 2, 25);
-		weaponList[1] = new Weapon("Gun", 2, 5, 35);
-		weaponList[2] = new Weapon("Rifle", 3, 7, 45);
+		weaponList[0] = new Weapon(1, "Sword", 2, 25);
+		weaponList[1] = new Weapon(2, "Pistol", 5, 35);
+		weaponList[2] = new Weapon(3, "Rifle", 7, 45);
 		return weaponList;
 	}
 	
@@ -27,23 +24,6 @@ public class Weapon {
 				return w;
 		}
 		return null;
-	}
-	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public int getDamage() {
